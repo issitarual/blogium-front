@@ -21,6 +21,7 @@ export default function NewStoryPage() {
       setContent("<p><br></p>");
       setCoverUrl("");
       setTitle("");
+      history.push("/")
     })
     request.catch(error => alert("Ocorreu um erro, tente novamente!"))
   }
