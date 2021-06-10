@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import Button from '../../Button';
 
-export default function AddComment({ postId }) {
+export default function AddComment({ postId, setComments, comments }) {
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
 
   function onAddCommentButtonClick() {
-    alert('No futuro isso vai adicionar o comentário :)');
-
+    const data = {
+        "author": `${name}`,
+        "content": `${content}`
+    }
+    const request = axios.post(`http://localhost:4000/posts/${postId}/comments`, data);
+    request.then(success => setComments([...comments, success.data]));
+    request.catch(error => alert("Ocorreu um erro, tente mais tarde!"))
     setName('');
     setContent('');
   }

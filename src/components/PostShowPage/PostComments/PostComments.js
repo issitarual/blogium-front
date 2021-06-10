@@ -22,7 +22,7 @@ export default function PostComments({ postId }) {
          ? comments.map(c => <Comment comment={c} key={c.id} />)
          : "No comments yet. Be the first to comment!"
       }
-      <AddComment postId={postId} />
+      <AddComment postId={postId} setComments={setComments} comments={comments}/>
     </Container>
   );
 }
