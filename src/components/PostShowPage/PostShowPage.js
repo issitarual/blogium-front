@@ -15,8 +15,9 @@ export default function PostShowPage() {
   const history = useHistory();
 
   useEffect(() => {
-    const request = axios.get(`http://localhost:4000/posts/${postId}`);
-    request.then(response => setPost(response.data));
+    const promess = axios.get(`http://localhost:4000/posts/${postId}`);
+    promess.then(success => setPost(success.data));
+    promess.catch(error => alert("Ocorreu um erro, tente novamente!"))
   }, [postId]);
 
   function onEditButtonClick() {

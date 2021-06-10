@@ -7,8 +7,8 @@ export default function HomePage() {
 
   useEffect(() => {
     const promess = axios.get("http://localhost:4000/posts");
-    promess.then((response) => setPosts(response.data))
-    promess.catch((error) => console.log("Deu erro!"))
+    promess.then((success) => setPosts(success.data))
+    promess.catch((error) => console.log("Ocorreu um erro, tente novamente!"))
   }, []);
 
   return (
