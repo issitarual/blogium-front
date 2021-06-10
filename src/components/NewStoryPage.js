@@ -12,13 +12,15 @@ export default function NewStoryPage() {
 
   function onPostSaveButtonClick() {
     const data = {
-      "title": `${content.replace("<p>", "").replace("</p>", "")}`,
+      "title": `${title}`,
+      "content": `${content.replace("<p>", "").replace("</p>", "")}`,
       "coverUrl": `${coverUrl}`
     }
     const request = axios.post("http://localhost:4000/posts", data);
     request.then(response => {
       setContent("<p><br></p>");
       setCoverUrl("");
+      setTitle("");
     })
     request.catch(error => alert("Ocorreu um erro, tente novamente!"))
   }

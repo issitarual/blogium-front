@@ -12,10 +12,10 @@ export default function AddComment({ postId, setComments, comments }) {
     const data = {
         "author": `${name}`,
         "content": `${content}`
-    }
+    };
     const request = axios.post(`http://localhost:4000/posts/${postId}/comments`, data);
     request.then(success => setComments([...comments, success.data]));
-    request.catch(error => alert("Ocorreu um erro, tente mais tarde!"))
+    request.catch(error => alert("Ocorreu um erro, tente mais tarde!"));
     setName('');
     setContent('');
   }

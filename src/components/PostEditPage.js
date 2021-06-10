@@ -14,22 +14,28 @@ export default function PostEditPage() {
   const history = useHistory();
 
   useEffect(() => {
-    const post = {
-      id: 1,
-      title: 'Hello World',
-      coverUrl: 'https://miro.medium.com/max/1024/1*OohqW5DGh9CQS4hLY5FXzA.png',
-      contentPreview: 'Esta é a estrutura de um post esperado pelo front-end',
-      content: 'Este é o conteúdo do post, o que realmente vai aparecer na página do post...'
-    };
-
+    const promess = axios.get(`http://localhost:4000/posts/${postId}`)
+    promess.then(success => {
+    const post = success.data;
+    const {title, coverUrl, content} = post;
     setPost(post);
-
-    setTitle(post.title);
-    setCoverUrl(post.coverUrl);
-    setContent(post.content);
+    setTitle(title);
+    setCoverUrl(coverUrl);
+    setContent(content);
+    })
+    promess.catch(error => alert ("Ocorreu um erro, tente novemente!"))
   }, [postId]);
 
-  function onPostSaveButtonClick() {}
+  function onPostSaveButtonClick() {
+    const data = {
+      "title": `${title}`,
+      "content": `${content}`,
+      "coverUrl": `${coverUrl}`
+    }
+    const req = axios.put(`http://localhost:4000/posts/${postId}`, data);
+    req.then(success => history.push(`/posts/${postId}`));
+    req.catch(error => alert("Ocoreu um erro, tente novamente."));
+  }
 
   if (!post || !content) return <Spinner />;
 
